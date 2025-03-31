@@ -32,7 +32,7 @@
   
   const agendarCita = async () => {
     try {
-      await axios.post('http://localhost:3000/api/citas', form.value)
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/citas`, form.value)
       mensaje.value = 'Cita agendada exitosamente'
       form.value = { nombre: '', email: '', telefono: '', fecha: '', motivo: '' }
     } catch (e) {
