@@ -2,8 +2,12 @@
 import { ref } from 'vue'
 
 const images = [
+  '/images/implantes.png',
+  '/images/inyeccion.png',
+  '/images/imagen4.jpg',
   '/images/image_1.png',
   '/images/imagen2.png',
+  
 ]
 
 const current = ref(0)
@@ -28,7 +32,8 @@ const prev = () => {
         <a href="#galeria" class="font-semibold">Galería</a>
       </div>
       <img src="/images/medicalcenter.png" alt="Medical Center Logo" class="h-10" />
-      <button class="bg-black text-white px-5 py-2 rounded">AGENDAR</button>
+      <router-link to="/agendar" class="bg-black text-white px-5 py-2 rounded">AGENDAR</router-link>
+
     </header>
 
     <!-- Hero Carousel -->
@@ -64,7 +69,8 @@ const prev = () => {
       <div class="w-1/2">
         <h2 class="text-4xl font-bold mb-4">Agenda para una valoración</h2>
         <p class="mb-6 text-gray-600">Lorem ipsum dolor sit amet...</p>
-        <button class="bg-black text-white px-5 py-2 rounded">AGENDAR</button>
+        <router-link to="/agendar" class="bg-black text-white px-5 py-2 rounded">AGENDAR</router-link>
+
       </div>
       <img src="/images/consulta.png" class="w-1/3" />
     </section>
@@ -87,7 +93,7 @@ const prev = () => {
           <a href="#" class="text-black mt-2 inline-block">How we can help you →</a>
         </div>
         <div class="bg-white shadow p-5 w-80">
-          <img src="/images/doctor3.png" class="mb-4" />
+          <img src="/images/doctor4.png" class="mb-4" />
           <h3 class="font-bold text-xl">Full Name</h3>
           <p class="text-sm text-gray-600">Lorem ipsum...</p>
           <a href="#" class="text-black mt-2 inline-block">How we can help you →</a>
