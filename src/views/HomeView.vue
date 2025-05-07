@@ -1,16 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
 const images = [
   '/images/implantes.png',
   '/images/inyeccion.png',
   '/images/imagen4.jpg',
   '/images/image_1.png',
-  '/images/imagen2.png',
-  
+  '/images/imagen2.png'
 ]
 
 const current = ref(0)
+const doctores = ref([])
 
 const next = () => {
   current.value = (current.value + 1) % images.length
@@ -19,6 +20,11 @@ const next = () => {
 const prev = () => {
   current.value = (current.value - 1 + images.length) % images.length
 }
+
+onMounted(async () => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/doctores`)
+  doctores.value = res.data
+})
 </script>
 
 
@@ -75,28 +81,18 @@ const prev = () => {
       <img src="/images/consulta.png" class="w-1/3" />
     </section>
 
-    <!-- Nuestro equipo -->
-    <section id="equipo" class="text-center py-20">
+<!-- Nuestro equipo -->
+<section id="equipo" class="text-center py-20">
       <h2 class="text-4xl font-bold mb-4">Nuestro equipo Médico</h2>
       <p class="mb-10 text-gray-600">Lorem ipsum dolor sit amet...</p>
-      <div class="flex justify-center gap-8">
-        <div class="bg-white shadow p-5 w-80">
-          <img src="/images/doctor.png" class="mb-4" />
-          <h3 class="font-bold text-xl">Full Name</h3>
-          <p class="text-sm text-gray-600">Lorem ipsum...</p>
-          <a href="#" class="text-black mt-2 inline-block">How we can help you →</a>
-        </div>
-        <div class="bg-white shadow p-5 w-80">
-          <img src="/images/doctor2.png" class="mb-4" />
-          <h3 class="font-bold text-xl">Full Name</h3>
-          <p class="text-sm text-gray-600">Lorem ipsum...</p>
-          <a href="#" class="text-black mt-2 inline-block">How we can help you →</a>
-        </div>
-        <div class="bg-white shadow p-5 w-80">
-          <img src="/images/doctor4.png" class="mb-4" />
-          <h3 class="font-bold text-xl">Full Name</h3>
-          <p class="text-sm text-gray-600">Lorem ipsum...</p>
-          <a href="#" class="text-black mt-2 inline-block">How we can help you →</a>
+      <div class="flex flex-wrap justify-center gap-8">
+        <div v-for="doctor in doctores" :key="doctor.id" class="bg-white shadow p-5 w-80">
+          <img :src="doctor.foto || '/images/default-doctor.png'" class="mb-4 w-full h-auto" />
+          <h3 class="font-bold text-xl">{{ doctor.nombre }}</h3>
+          <p class="text-sm text-gray-600">{{ doctor.especialidad }}</p>
+          <router-link :to="`/doctor/${doctor.id}`" class="text-black mt-2 inline-block">
+            Ver perfil →
+          </router-link>
         </div>
       </div>
     </section>

@@ -16,6 +16,12 @@ const router = createRouter({
       component: AgendarView
     },
     {
+      path: '/doctor/:id',
+      name: 'DoctorView',
+      component: () => import('@/views/DoctorView.vue')
+    },
+    
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
