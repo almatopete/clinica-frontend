@@ -140,7 +140,7 @@ const handleHoraSeleccionada = (eventData) => {
 
 const fetchDoctores = async () => {
   try {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/doctores`)
+    const res = await axios.get('/api/doctores')
     doctores.value = res.data
   } catch (err) {
     console.error('Error cargando doctores:', err)
@@ -152,7 +152,7 @@ const fetchHorarios = async () => {
     horarios.value = []
     selectedHorario.value = null
     if (!selectedDoctor.value) return
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/horarios/${selectedDoctor.value}`)
+    const res = await axios.get(`/api/horarios/${selectedDoctor.value}`)
     horarios.value = res.data
   } catch (err) {
     console.error('Error cargando horarios:', err)
@@ -173,7 +173,7 @@ const agendarCita = async () => {
       fecha
     }
 
-    const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/citas`, citaData)
+    const res = await axios.post('/api/citas', citaData)
     confirmacion.value = res.data
     mensaje.value = 'Cita agendada exitosamente.'
     form.value = { nombre: '', email: '', telefono: '', motivo: '' }

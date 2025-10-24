@@ -6,7 +6,7 @@ const images = [
   '/images/implantes.png',
   '/images/inyeccion.png',
   '/images/imagen4.jpg',
-  '/images/image_1.png',
+  '/images/imagen3.png',
   '/images/imagen2.png'
 ]
 
@@ -22,7 +22,7 @@ const prev = () => {
 }
 
 onMounted(async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/doctores`)
+  const res = await axios.get('/api/doctores')
   doctores.value = res.data
 })
 </script>
@@ -42,7 +42,6 @@ onMounted(async () => {
 
     </header>
 
-    <!-- Hero Carousel -->
     <section class="relative h-[500px] bg-gray-100 flex items-center justify-center overflow-hidden">
     <img :src="images[current]" class="object-cover h-full w-full" />
 
@@ -64,7 +63,7 @@ onMounted(async () => {
       <h2 class="text-3xl font-bold mb-10">Servicios</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 place-items-center">
 
-        <img src="/images/image_1.png" class="rounded-full w-60 h-60 object-cover" />
+        <img src="/images/imagen4.jpg" class="rounded-full w-60 h-60 object-cover" />
         <img src="/images/imagen2.png" class="rounded-full w-60 h-60 object-cover" />
         <img src="/images/imagen3.jpg" class="rounded-full w-60 h-60 object-cover" />
       </div>
@@ -159,5 +158,4 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos adicionales si es necesario */
 </style>

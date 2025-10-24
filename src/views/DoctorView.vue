@@ -35,7 +35,7 @@
   const doctor = ref({})
   
   onMounted(async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/doctores/${route.params.id}`)
+    const { data } = await axios.get(`/api/doctores/${route.params.id}`)
     doctor.value = data
   })
   </script>

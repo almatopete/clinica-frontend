@@ -1,9 +1,8 @@
 <template>
     <div class="max-w-3xl mx-auto py-10 px-4">
-      <h1 class="text-3xl font-bold mb-6">My Appointments</h1>
-  
+        <h1 class="text-3xl font-bold mb-6">Mis citas</h1>  
       <div v-if="citas.length === 0" class="text-gray-600">
-        You have no upcoming appointments.
+          No tienes citas próximas.        
       </div>
   
       <ul v-else class="space-y-4">
@@ -21,8 +20,9 @@
             @click="cancelarCita(cita.id)"
             class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-4"
           >
-            Cancel
+            Cancelar
           </button>
+          <router-link :to="`/reagendar/${cita.id}`" class="ml-2 px-3 py-2 border rounded">Reagendar</router-link>
         </li>
       </ul>
     </div>
@@ -45,14 +45,14 @@
     })
   
   const fetchCitas = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/my-appointments`)
+    const res = await axios.get('/api/users/my-appointments')
     citas.value = res.data
   }
   
   const cancelarCita = async (id) => {
     if (confirm('Are you sure you want to cancel this appointment?')) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/api/citas/${id}`)
+        await axios.delete(`/api/citas/${id}`)
         await fetchCitas() // Refresh list
       } catch (err) {
         alert('Failed to cancel the appointment.')

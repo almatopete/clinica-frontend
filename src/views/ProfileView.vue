@@ -5,6 +5,7 @@
         <p><strong>Name:</strong> {{ user.nombre }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Registered:</strong> {{ formatDate(user.createdAt) }}</p>
+<button @click="doLogout">Cerrar sesion</button>
       </div>
     </div>
   </template>
@@ -18,8 +19,19 @@
   const formatDate = (date) => new Date(date).toLocaleDateString()
   
   onMounted(async () => {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/me`)
+    const res = await axios.get('/api/users/me')
     user.value = res.data
   })
   </script>
-  
+
+  <script>
+export default {
+  name: "MyButton",
+  methods: {
+    doLogout() {
+      console.log("Hello from Vue!");
+      useAuth().logout();
+    }
+  }
+};
+</script>

@@ -29,7 +29,7 @@
   const register = async () => {
     loading.value = true
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/register`, form.value)
+      const res = await axios.post('/api/register', form.value)
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       router.push('/')

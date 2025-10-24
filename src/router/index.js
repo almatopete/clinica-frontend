@@ -17,6 +17,12 @@ const requireAuth = (to, from, next) => {
     next()
   }
 }
+const requireRole = roles => (to, from, next) => {
+  const raw = localStorage.getItem('user')
+  const user = raw ? JSON.parse(raw) : null
+  if (!user || !roles.includes(user.role)) return next('/login')
+  next()
+}
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -36,7 +42,15 @@ const routes = [
     component: MyAppointmentsView,
     beforeEnter: requireAuth
   },  
-  { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') }
+  
+  { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
+  { path: '/reagendar/:id', name: 'reagendar', component: () => import('@/views/ReagendarView.vue'), beforeEnter: requireAuth }, 
+  { path: '/doctor/agenda', name: 'doctor-agenda', component: () => import('@/views/DoctorAgendaView.vue'), beforeEnter: requireRole(['DOCTOR']) },
+  { path: '/admin/horarios', name: 'admin-horarios', component: () => import('@/views/AdminHorariosView.vue'), beforeEnter: requireRole(['ADMIN']) },
+  { path: '/admin/citas', name: 'admin-citas', component: () => import('@/views/AdminCitasView.vue'), beforeEnter: requireRole(['ADMIN']) }, 
+  { path: '/admin/doctores', name: 'admin-doctores', component: () => import('@/views/AdminDoctoresView.vue'), beforeEnter: requireRole(['ADMIN']) },
+  { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/NotFoundView.vue') }
+
 ]
 
 const router = createRouter({

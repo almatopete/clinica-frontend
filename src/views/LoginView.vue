@@ -32,9 +32,9 @@ const loading = ref(false)
 const login = async () => {
   loading.value = true
   try {
-    const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, form.value)
+    const res = await axios.post('/api/login', form.value)
     
-    // ⬇️ En lugar de localStorage, usa la función login del store
+    
     loginAuth(res.data.token, res.data.user)
 
     router.push(route.query.redirect || '/agendar')
